@@ -1,105 +1,88 @@
 #include<iostream>
-#include<iomanip>
-#include<fstream>
-#include<conio.h> 
+#include<iomanip>  
+#include<fstream>  
+#include<conio.h>  
 #include<string.h>
-#include<stdio.h>
-#include <cstdlib>
+#include<stdio.h>   
+#include <cstdlib> 
 #include <windows.h>
 using namespace std;
 
-/************************************************
- * 					GLOBAL VARIABLE				*
- ************************************************/
-//counter for Book array
-int g_nCounter = 0;
-Book books[10];
-
-//function for incrementing counter
-void increment(int a){
-	a++;
-	counter=a;
-}
-
-//function for decrementing counter
-void decrement(int a){
-	a--;
-	counter=a;
-}
-
-/****************CLASS BOOK*********************/
+/***************************CLASS BOOK***************************/
 class Book
 {
 	private:
 		int nPubYear;
 		string sId, sTitle, sAuthor, sCategory;
 	public:
-		//setters - assigning user value to private variables
-		void setId(string a){nId = a;}
-		void setTitle(string b){sTitle = b;}
-		void setAuthor(string c){sAuthor = c;}
-		void setCategory(string d){sCategory = d;}
-		void setPublication(string e){nPubYear = e;}
-
-		//getters - getting the values from private variables
-		string getId(){return nId;}
-		string getTitle(){return sTitle;}
-		string getAuthor(){return sAuthor;}
-		string getCategory(){return sCategory;}
-		int getPublication(){return nPubYear;}
-
-		//initializing functions with counter as parameter
-		void addBook(int g_nCounter);
-		void deleteBook(int g_nCounter);
-		void editBook(int g_nCounter);
-		void searchBook(int g_nCounter);
-		void viewAllBooks(int g_nCounter);
-		void quit();
+		void addBook();
+		void displayBook();
 };
 
-void Book::addBook(int g_nCounter)
+void Book::addBook()
 {
-	cout<<"ADD BOOK\n\n";
-	if(counter<10){
-		cout<<"Enter ID: "; getline(cin,sId);
-		cout<<"Enter Title: "; getline(cin,sTitle);
-		cout<<"Enter Author: "; getline(cin,sAuthor);
-		cout<<"Enter Edition: "; getline(cin,sCategory);
-		cout<<"Enter Publication: "; cin >> sPubYear;
-		books[counter].setIsbn(isbn);
-		//assigning the values entered to book object
-		books[counter].setTitle(sTitle);
-		books[counter].setAuthor(sAuthor);
-		books[counter].setCategory(sCategory);
-		books[counter].setPublication(sPubYear);	
-		increment(counter);	//calling function to increment counter
-		cout<<"\nBOOK ADDED SUCCESSFULLY!\n\nPress any key to continue . . .";
-		_getch();
-		main();
+	int n;
+	char ch;
+	cout << "Enter the quantity of books you want to add: "; cin >> n;
+	do{
+	for (int i = 0; i < n; i++)
+	{
+		system("cls");
+		cout<<endl;
+		cout<<"ADD BOOK\n\n";
+		cout<<"Enter ID: ";
+		getline(cin,sId);
+		cout<<"Enter Title: ";
+		getline(cin,sTitle);
+		cout<<"Enter sAuthor: ";
+		getline(cin,sAuthor);
+		cout<<"Enter Category: ";
+		getline(cin,sCategory);
+		cout<<"Enter Publication: ";
+		cin >> nPubYear;
+        cout<<"\n\n\nBook Created..";
 	}
-	else{
-		cout<<"YOU HAVE REACHED THE MAXIMUM NUMBER OF BOOKS TOBE ADDED!\n\nPress any key to continue . . .";
-		_getch();
-		main();
-	}
+		cout<<"Do you want to add more books? [y/n]";
+		ch = getch();
+	} while(ch!='n'&& ch!='N');
 }
-/**************END CLASS BOOK*****************************/
 
-/************************************************
- * 					GOTOXY 						*
- ************************************************/
-void gotoxy(short x, short y)
+void Book::displayBook()
+{
+	system("cls");
+		cout<< "In display function\n";
+		cout<<"__________"<<"__________________________________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
+		cout<<setw(10)<<"\"Book ID\""<<setw(50)<<"\"Book Name\""<<setw(30)<<"\"Author Name\""<<setw(30)<<"\"Category\""<<setw(30)<<"\"Year of Publication\"" << endl;
+		cout<<"__________"<<"__________________________________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
+		for(int i = 0; i < n; i++)
+			{
+				cout<<setw(10)<<sId<<setw(50)<<sTitle<<setw(30)<<sAuthor<<setw(30)<<sCategory<<setw(30)<<nPubYear << endl;
+				cout<<"__________"<<"__________________________________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
+			}
+			cout<<"Press enter to go to main menu.....";
+			getch();
+}
+/*************************CLASS STUDENT*************************/
+/*class Student
+{
+
+};*/
+/***************************************************************/
+	//////////////////////////////////////////////////
+	/////////////////GOTOXY //////////////////////////
+	//////////////////////////////////////////////////
+void gotoxy(short x, short y) 
 {
 	COORD pos = {x, y};
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-/************************************************
- * 					MAIN MENU 					*
- ************************************************/
+	//////////////////////////////////////
+	/////////////Main Menu////////////////
+	/////////////////////////////////////
 int main()
 {
-	Book b;
+	Book book;
 	while (1)
     {
 		system("cls");
@@ -138,9 +121,9 @@ int main()
 	     
 		switch(getche())
 		{
-		 	case 1: b.addBook(); break;
+		 	case 1: book.addBook(); break;
          
-		 	case 2: //display(); break;
+		 	case 2: book.displayBook(); break;
          
 		 	case 3: //search(); break;
          
