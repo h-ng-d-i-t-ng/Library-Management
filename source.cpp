@@ -132,6 +132,21 @@ void Book::deleteBook(int g_nCounter){
 	main();
 	
 }
+void viewAllBooks(int g_nCounter){
+	//iterating all the values on the library using book array
+	cout<<"VIEW ALL BOOKS\n\n";
+	for(int i=0;i<g_nCounter;i++){
+		cout<<"BOOK DETAILS\n\n";
+		cout<<"ISBN: "<<books[i].getId()<<endl;
+		cout<<"TITLE: "<<books[i].getTitle()<<endl;
+		cout<<"AUTHOR: "<<books[i].getAuthor()<<endl;
+		cout<<"EDITION: "<<books[i].getCategory()<<endl;
+		cout<<"PUBLICATION: "<<books[i].getPublication()<<endl<<endl;
+	}
+	cout<<"Press any key to continue . . .";
+	_getch();
+	main();
+}
 /**************END CLASS BOOK*****************************/
 =======
 
