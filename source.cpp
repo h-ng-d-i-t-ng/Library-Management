@@ -8,6 +8,7 @@
 #include <windows.h>
 using namespace std;
 
+
 /************************************************
  * 					GLOBAL VARIABLE				*
  ************************************************/
@@ -18,13 +19,13 @@ Book books[10];
 //function for incrementing counter
 void increment(int a){
 	a++;
-	counter=a;
+	g_nCounter=a;
 }
 
 //function for decrementing counter
 void decrement(int a){
 	a--;
-	counter=a;
+	g_nCounter=a;
 }
 
 /****************CLASS BOOK*********************/
@@ -35,14 +36,14 @@ class Book
 		string sId, sTitle, sAuthor, sCategory;
 	public:
 		//setters - assigning user value to private variables
-		void setId(string a){nId = a;}
+		void setId(string a){sId = a;}
 		void setTitle(string b){sTitle = b;}
 		void setAuthor(string c){sAuthor = c;}
 		void setCategory(string d){sCategory = d;}
 		void setPublication(string e){nPubYear = e;}
 
 		//getters - getting the values from private variables
-		string getId(){return nId;}
+		string getId(){return sId;}
 		string getTitle(){return sTitle;}
 		string getAuthor(){return sAuthor;}
 		string getCategory(){return sCategory;}
@@ -60,19 +61,19 @@ class Book
 void Book::addBook(int g_nCounter)
 {
 	cout<<"ADD BOOK\n\n";
-	if(counter<10){
+	if(g_nCounter<10){
 		cout<<"Enter ID: "; getline(cin,sId);
 		cout<<"Enter Title: "; getline(cin,sTitle);
 		cout<<"Enter Author: "; getline(cin,sAuthor);
 		cout<<"Enter Edition: "; getline(cin,sCategory);
-		cout<<"Enter Publication: "; cin >> sPubYear;
-		books[counter].setIsbn(isbn);
+		cout<<"Enter Publication: "; cin >> nPubYear;
+		books[g_nCounter].setId(sId);
 		//assigning the values entered to book object
-		books[counter].setTitle(sTitle);
-		books[counter].setAuthor(sAuthor);
-		books[counter].setCategory(sCategory);
-		books[counter].setPublication(sPubYear);	
-		increment(counter);	//calling function to increment counter
+		books[g_nCounter].setTitle(sTitle);
+		books[g_nCounter].setAuthor(sAuthor);
+		books[g_nCounter].setCategory(sCategory);
+		books[g_nCounter].setPublication(nPubYear);	
+		increment(g_nCounter);	//calling function to increment counter
 		cout<<"\nBOOK ADDED SUCCESSFULLY!\n\nPress any key to continue . . .";
 		_getch();
 		main();
@@ -83,7 +84,60 @@ void Book::addBook(int g_nCounter)
 		main();
 	}
 }
+void Book::deleteBook(int g_nCounter){
+	string sId;
+	int choice;
+	cout<<"DELETE BOOK\n\n";
+	if(g_nCounter == 0){
+		cout<<"THERE IS NO BOOK TO DELETE!\n\nPress any key to continue . . .";
+		_getch();
+		main();
+	}
+	cout<<"Enter ISBN: ";
+	getline(cin,sId);
+
+	for(int i = 0 ;i < g_nCounter; i++){
+		//finding a match using for loop
+		if(books[i].getId() == sId){
+			cout<<"\nBOOK FOUND\n\n";
+			cout<<"Do you want to delete?\n[1]Yes\n[2]No\n\nEnter Choice: ";
+			cin>>choice;
+			if(choice==1){
+				books[i].setId(""); //setting the value to none
+				books[i].setTitle("");
+				books[i].setAuthor("");
+				books[i].setCategory("");
+				books[i].setPublication("");
+				for(int a = i;a < g_nCounter; a++){
+					//adjusting the values after deletion of data eg. data from book[4] copied to book[3]
+					books[a] = books[a+1];
+				}
+				books[9].setId(""); //adjustment if the library is full(10 books)
+				books[9].setTitle("");
+				books[9].setAuthor("");
+				books[9].setCategory("");
+				books[9].setPublication("");
+				decrement(g_nCounter); //calling function to decrement counter
+				cout<<"\nBOOK SUCCESSFULLY DELETED!\n\nPress any key to continue . . .";
+				_getch();
+				main();
+			}
+			else{
+				main();
+			}
+		}
+	}
+	cout<<"\nBOOK NOT FOUND!\n\nPress any key to continue . . .";
+	_getch();
+	main();
+	
+}
 /**************END CLASS BOOK*****************************/
+=======
+
+//counter for Book array
+//int g_nCounter = 0;
+>>>>>>> Stashed changes
 
 /************************************************
  * 					GOTOXY 						*
