@@ -84,69 +84,7 @@ void Book::addBook(int g_nCounter)
 		main();
 	}
 }
-void Book::deleteBook(int g_nCounter){
-	string sId;
-	int choice;
-	cout<<"DELETE BOOK\n\n";
-	if(g_nCounter == 0){
-		cout<<"THERE IS NO BOOK TO DELETE!\n\nPress any key to continue . . .";
-		_getch();
-		main();
-	}
-	cout<<"Enter ISBN: ";
-	getline(cin,sId);
 
-	for(int i = 0 ;i < g_nCounter; i++){
-		//finding a match using for loop
-		if(books[i].getId() == sId){
-			cout<<"\nBOOK FOUND\n\n";
-			cout<<"Do you want to delete?\n[1]Yes\n[2]No\n\nEnter Choice: ";
-			cin>>choice;
-			if(choice==1){
-				books[i].setId(""); //setting the value to none
-				books[i].setTitle("");
-				books[i].setAuthor("");
-				books[i].setCategory("");
-				books[i].setPublication("");
-				for(int a = i;a < g_nCounter; a++){
-					//adjusting the values after deletion of data eg. data from book[4] copied to book[3]
-					books[a] = books[a+1];
-				}
-				books[9].setId(""); //adjustment if the library is full(10 books)
-				books[9].setTitle("");
-				books[9].setAuthor("");
-				books[9].setCategory("");
-				books[9].setPublication("");
-				decrement(g_nCounter); //calling function to decrement counter
-				cout<<"\nBOOK SUCCESSFULLY DELETED!\n\nPress any key to continue . . .";
-				_getch();
-				main();
-			}
-			else{
-				main();
-			}
-		}
-	}
-	cout<<"\nBOOK NOT FOUND!\n\nPress any key to continue . . .";
-	_getch();
-	main();
-	
-}
-void viewAllBooks(int g_nCounter){
-	//iterating all the values on the library using book array
-	cout<<"VIEW ALL BOOKS\n\n";
-	for(int i=0;i<g_nCounter;i++){
-		cout<<"BOOK DETAILS\n\n";
-		cout<<"ISBN: "<<books[i].getId()<<endl;
-		cout<<"TITLE: "<<books[i].getTitle()<<endl;
-		cout<<"AUTHOR: "<<books[i].getAuthor()<<endl;
-		cout<<"EDITION: "<<books[i].getCategory()<<endl;
-		cout<<"PUBLICATION: "<<books[i].getPublication()<<endl<<endl;
-	}
-	cout<<"Press any key to continue . . .";
-	_getch();
-	main();
-}
 /**************END CLASS BOOK*****************************/
 =======
 
@@ -168,7 +106,7 @@ void gotoxy(short x, short y)
  ************************************************/
 int main()
 {
-	Book b;
+	Book h;
 	while (1)
     {
 		system("cls");
