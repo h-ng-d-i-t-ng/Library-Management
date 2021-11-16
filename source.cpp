@@ -11,8 +11,8 @@ using namespace std;
 /***************************CLASS BOOK***************************/
 class Book
 {
-	private:
-		int nPubYear;
+	protected:
+		int nPubYear, n;
 		string sId, sTitle, sAuthor, sCategory;
 	public:
 		void addBook();
@@ -21,7 +21,7 @@ class Book
 
 void Book::addBook()
 {
-	int n;
+	
 	char ch;
 	cout << "Enter the quantity of books you want to add: "; cin >> n;
 	do{
@@ -49,6 +49,7 @@ void Book::addBook()
 
 void Book::displayBook()
 {
+	 
 	system("cls");
 		cout<< "In display function\n";
 		cout<<"__________"<<"__________________________________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
