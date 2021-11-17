@@ -1,23 +1,25 @@
-#include<iostream>
-#include<iomanip>  
-#include<fstream>  
-#include<conio.h>  
-#include<string.h>
-#include<stdio.h>   
+#include <iostream>
+#include <iomanip>  
+#include <fstream>  
+#include <conio.h>  
+#include <string.h>
+#include <stdio.h>   
 #include <cstdlib> 
 #include <windows.h>
-#include<time.h>
+#include <time.h>
 using namespace std;
 
 /***************************CLASS BOOK***************************/
 class Book
 {
 	protected:
-		int  n;
-		string sId, sTitle, sAuthor, sCategory, sPubYear;
+		int nPubYear;
+		string sId, sTitle, sAuthor, sCategory;
 	public:
 		void addBook();
-		void displayBook();
+		void add(Book *B, int n);
+		void print();
+		void displayBook(Book *B, int n);
 		void modify_book();
 		void write_book();
 	
@@ -25,10 +27,26 @@ class Book
 fstream fp;
 Book book;
 
-
 void Book::addBook()
 {
-	
+	fflush(stdin);
+	cout<<"\n\nEnter ID: ";
+	getline(cin,sId); cout << endl;
+	fflush(stdin);
+	cout<<"Enter Title: ";
+	getline(cin,sTitle); cout << endl;
+	fflush(stdin);
+	cout<<"Enter Author: ";
+	getline(cin,sAuthor); cout << endl;
+	fflush(stdin);
+	cout<<"Enter Category: ";
+	getline(cin,sCategory); cout << endl;
+	cout<<"Enter Publication: ";
+	cin >> nPubYear ; cout << endl;
+}
+
+void Book::add(Book *B, int n)
+{
 	char ch;
 	do{
 	system("cls");
@@ -39,26 +57,34 @@ void Book::addBook()
 		cout<<endl;
 		cout<<"ADD BOOK\n\n";
 		cout << "Book no." << i+1;
-		fflush(stdin); cout << endl << endl;
-		cout<<"Enter ID: ";
-		getline(cin,sId); cout << endl;
-		fflush(stdin);
-		cout<<"Enter Title: ";
-		getline(cin,sTitle); cout << endl;
-		fflush(stdin);
-		cout<<"Enter Author: ";
-		getline(cin,sAuthor); cout << endl;
-		fflush(stdin);
-		cout<<"Enter Category: ";
-		getline(cin,sCategory); cout << endl;
-		cout<<"Enter Publication: ";
-		getline(cin,sPubYear) ; cout << endl;
+		(B+i)->addBook();
         cout<<"\n\n\nBook Created..";
         Sleep(1000);
 	}
 		cout<<"Do you want to add more books? [y/n]";
 		ch = getch();
 	} while(ch!='n'&& ch!='N');
+}
+
+void Book::print()
+{
+	cout<<setw(10)<<sId<<setw(50)<<sTitle<<setw(30)<<sAuthor<<setw(30)<<sCategory<<setw(30)<<nPubYear << endl;
+}
+
+void Book::displayBook(Book *B, int n)
+{ 
+	system("cls");
+	cout << "In display function\n";
+	cout << "__________"<<"__________________________________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
+	cout << setw(10)<<"\"Book ID\""<<setw(50)<<"\"Book Name\""<<setw(30)<<"\"Author Name\""<<setw(30)<<"\"Category\""<<setw(30)<<"\"Year of Publication\"" << endl;
+	cout << "__________"<<"__________________________________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
+	for(int i = 0; i < n; i++)
+	{
+		(B+i)->print();
+		cout <<"__________"<<"__________________________________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
+	}
+	cout << "Press enter to go to main menu.....";
+	getch();
 }
 
 void Book::write_book()
@@ -75,23 +101,7 @@ void Book::write_book()
     }while(ch=='y'||ch=='Y');
     fp.close();
 }
-void Book::displayBook()
-{
-	 
-	system("cls");
-		cout<< "In display function\n";
-		cout<<"__________"<<"__________________________________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
-		cout<<setw(10)<<"\"Book ID\""<<setw(50)<<"\"Book Name\""<<setw(30)<<"\"Author Name\""<<setw(30)<<"\"Category\""<<setw(30)<<"\"Year of Publication\"" << endl;
-		cout<<"__________"<<"__________________________________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
-		for(int i = 0; i < n; i++)
-			{
-				cout<<setw(10)<<sId<<setw(50)<<sTitle<<setw(30)<<sAuthor<<setw(30)<<sCategory<<setw(30)<<sPubYear << endl;
-				cout<<"__________"<<"__________________________________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
-			}
-			cout<<"Press enter to go to main menu.....";
-			getch();
-}
-/*************************CLASS STUDENT*************************/
+/*********************END CLASS STUDENT*************************/
 /*class Student
 {
 
@@ -111,7 +121,8 @@ void gotoxy(short x, short y)
 	/////////////////////////////////////
 int main()
 {
-	
+	int n;
+	Book *B=new Book[n];
 	while (1)
     {
 		system("cls");
@@ -153,10 +164,10 @@ int main()
 		switch(getche())
 		{
 			case 'a':
-		 	case 'A': book.addBook(); break;
+		 	case 'A': book.add(B,n); break;
          
 			case 'd':
-		 	case 'D': book.displayBook(); break;
+		 	case 'D': book.displayBook(B,n); break;
          
 		 	//case 'S':
 		 	//case 's':search();break;
@@ -180,5 +191,8 @@ int main()
      }//end while
     
 	getch();
+
+	system("pause");
+	return 0;
 }
 
