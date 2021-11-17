@@ -13,12 +13,18 @@ using namespace std;
 class Book
 {
 	protected:
-		int nPubYear, n;
-		string sId, sTitle, sAuthor, sCategory;
+		int  n;
+		string sId, sTitle, sAuthor, sCategory, sPubYear;
 	public:
 		void addBook();
 		void displayBook();
+		void modify_book();
+		void write_book();
+	
 };
+fstream fp;
+Book book;
+
 
 void Book::addBook()
 {
@@ -36,14 +42,17 @@ void Book::addBook()
 		fflush(stdin); cout << endl << endl;
 		cout<<"Enter ID: ";
 		getline(cin,sId); cout << endl;
+		fflush(stdin);
 		cout<<"Enter Title: ";
 		getline(cin,sTitle); cout << endl;
+		fflush(stdin);
 		cout<<"Enter Author: ";
 		getline(cin,sAuthor); cout << endl;
+		fflush(stdin);
 		cout<<"Enter Category: ";
 		getline(cin,sCategory); cout << endl;
 		cout<<"Enter Publication: ";
-		cin >> nPubYear; cout << endl;
+		getline(cin,sPubYear) ; cout << endl;
         cout<<"\n\n\nBook Created..";
         Sleep(1000);
 	}
@@ -52,6 +61,20 @@ void Book::addBook()
 	} while(ch!='n'&& ch!='N');
 }
 
+void Book::write_book()
+{
+    char ch;
+    fp.open("book.dat",ios::out|ios::app);
+    do
+    {
+
+        book.addBook();
+        fp.write((char*)&book, sizeof(Book));
+        cout<<"\n\nDo you want to add more record..(y/n?)";
+        cin>>ch;
+    }while(ch=='y'||ch=='Y');
+    fp.close();
+}
 void Book::displayBook()
 {
 	 
@@ -62,7 +85,7 @@ void Book::displayBook()
 		cout<<"__________"<<"__________________________________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
 		for(int i = 0; i < n; i++)
 			{
-				cout<<setw(10)<<sId<<setw(50)<<sTitle<<setw(30)<<sAuthor<<setw(30)<<sCategory<<setw(30)<<nPubYear << endl;
+				cout<<setw(10)<<sId<<setw(50)<<sTitle<<setw(30)<<sAuthor<<setw(30)<<sCategory<<setw(30)<<sPubYear << endl;
 				cout<<"__________"<<"__________________________________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
 			}
 			cout<<"Press enter to go to main menu.....";
@@ -88,7 +111,7 @@ void gotoxy(short x, short y)
 	/////////////////////////////////////
 int main()
 {
-	Book book;
+	
 	while (1)
     {
 		system("cls");
@@ -158,3 +181,4 @@ int main()
     
 	getch();
 }
+
