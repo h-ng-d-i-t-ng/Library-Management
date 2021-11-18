@@ -169,16 +169,16 @@ int main()
 		 	case 'D': book.displayBook(B,n); break;
          
 		 	//case 'S':
-		 	//case 's': search();break;
+		 	//case 's': search(); break;
          
 		 	//case 't':
-		 	//case 'T': del();break;
+		 	//case 'T': del(); break;
 		 
 		 	//case 'O':
-		 	//case 'o': sort();break;
+		 	//case 'o': sort(); break;
          
 		 	//case 'm':
-		 	//case 'M': modify();break;
+		 	//case 'M': modify(); break;
 		 
 		 	case 'q':
 		 	case 'Q': exit(0); break;
