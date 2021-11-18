@@ -9,7 +9,6 @@
 #include<time.h>
 
 using namespace std;
-/***************************CLASS BOOK***************************/
 class Book {
 	private:
 		string sid,stitle,sAuthor,sCategory; //private variables
@@ -36,7 +35,7 @@ class Book {
 	};
 	void Book::add(){
 		cout<<"\nNhap Ten Sach:";
-		//cin.ignore() ;
+		cin.ignore() ;
 		getline(cin,stitle);
 		cout<<"\nNhap ID Sach:";
 		//cin.ignore();
@@ -147,19 +146,77 @@ void timkiemTG(Book *B ,int n){
 		cout<<"\ntrong thu vien khong co sach nay!!!!";
 	} 
 }
+void themsach(Book *B,int n){
+	n++;
+	(B+n-1)->add();
+} 
+void SapXepSoLuongSachTangDan(Book *B, int n){
+	for(int i=0; i<n-1; i++){
+		for(int j=i+1; j<n; j++){
+			if((B+i)->getsl()>(B+j)->getsl()){
+				Book temp;
+				temp = *(B+i);
+				*(B+i) = *(B+j);
+				*(B+j)=temp;
+			}
+		}
+	}
+}
+void SapXepSoLuongSachGiamDan(Book *B, int n){
+	for(int i=0; i<n-1; i++){
+		for(int j=i+1; j<n; j++){
+			if((B+i)->getsl()<(B+j)->getsl()){
+				Book temp;
+				temp = *(B+i);
+				*(B+i) = *(B+j);
+				*(B+j)=temp;
+			}
+		}
+	}
+}
+void suadoi_1_tuong(Book *B , int n){
+	int j=0;
+	string TS;
+	cout<<"\nnhap ten sach ban muon sua thong tin: ";
+	cin.ignore();
+	getline(cin,TS);
+	for(int i=0;i<n;i++){
+		if((B+i)->getTitle()==TS){
+			Book temt;
+			temt.add() ;
+			*(B+i)=temt;
+			j++;
+		}
+	}
+	if(j<=0) cout<<"Trong Thu Vien Khong Co Sach Nay!!!";
+}
+void suadoitoanbo(Book *B , int &n){
+	int m;
+	cout<<"\nnhap so loai sach ban muon quan ly:";
+	cin>>m;
+	n=m;
+	adddanhsach(B,m); 
+}
 int main(){
 	int n;
 	cout<<"Nhap So Sach Ban Muon Quan Ly:";
 	cin>>n;
-	cin.ignore();
+	//cin.ignore();
 	Book *B=new Book[n];
 	adddanhsach(B,n);
-	//indanhsach(B,n);
+	indanhsach(B,n);
+	//suadoituong(B,n);
+	
+	
+	suadoitoanbo(B,n);
+	 indanhsach(B,n);
 	//Xuatvaofile(B,n); 
 	//write_book(B,n);
 	//Nhaptufile(B,n);
-	indanhsach(B,n); 
-	timkiemten(B,n);
+	 
+	//timkiemten(B,n);
+	
+	//indanhsach(B,n);  
 	
 }
 	
