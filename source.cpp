@@ -62,22 +62,22 @@ void Book::addBook()
 {
 	SET_COLOR(1);
 	fflush(stdin);
-	cout << "\n\nEnter ID: ";
+	cout << "\n\nNhap ID: ";
 	getline(cin, sId);
 	cout << endl;
 	fflush(stdin);
-	cout << "Enter Title: ";
+	cout << "Nhap tua de: ";
 	getline(cin, sTitle);
 	cout << endl;
 	fflush(stdin);
-	cout << "Enter Author: ";
+	cout << "Nhap tac gia: ";
 	getline(cin, sAuthor);
 	cout << endl;
 	fflush(stdin);
-	cout << "Enter Category: ";
+	cout << "Nhap the loai ";
 	getline(cin, sCategory);
 	cout << endl;
-	cout << "Enter Publication: ";
+	cout << "Nhap nam xuat ban: ";
 	cin >> nPubYear;
 	cout << endl;
 }
@@ -89,22 +89,22 @@ void Book::add(Book *B, int n)
 	{
 		system("cls");
 		SET_COLOR(4);
-		cout << "Enter the quantity of books you want to add: ";
+		cout << "So luong quyen sach ban muon them vao: ";
 		cin >> n;
 		for (int i = 0; i < n; i++)
 		{
 			system("cls");
 			cout << endl;
-			cout << "ADD BOOK\n\n";
+			cout << "THEM THONG TIN SACH\n\n";
 			SET_COLOR(0);
-			cout << "Book no." << i + 1;
+			cout << "Quyen thu " << i + 1;
 			(B + i)->addBook();
 			SET_COLOR(5);
-			cout << "\n\n\nBook Created...";
+			cout << "\n\n\nSach da duoc them...";
 			Sleep(1000);
 		}
 		SET_COLOR(4);
-		cout << "Do you want to add more books? [y/n]";
+		cout << "Ban co muon nhap tiep? [y/n]";
 		ch = getch();
 	} while (ch != 'n' && ch != 'N');
 }
@@ -119,14 +119,14 @@ void Book::displayBook(Book *B, int n)
 {
 	system("cls");
 	SET_COLOR(4);
-	cout << "In display function\n";
+	cout << "Danh sach cac quyen sach\n";
 	cout << "__________"
 		 << "__________________________________________________"
 		 << "______________________________"
 		 << "______________________________"
 		 << "______________________________" << endl;
 	SET_COLOR(5);
-	cout << setw(10) << "\"Book ID\"" << setw(50) << "\"Book Name\"" << setw(30) << "\"Author Name\"" << setw(30) << "\"Category\"" << setw(30) << "\"Year of Publication\"" << endl;
+	cout << setw(10) << "\"ID\"" << setw(50) << "\"Tua de\"" << setw(30) << "\"Ten tac gia\"" << setw(30) << "\"The loai\"" << setw(30) << "\"Nam xuat ban\"" << endl;
 	SET_COLOR(4);
 	cout << "__________"
 		 << "__________________________________________________"
@@ -144,7 +144,7 @@ void Book::displayBook(Book *B, int n)
 			 << "______________________________"
 			 << "______________________________" << endl;
 	}
-	cout << "Press enter to go to main menu.....";
+	cout << "Nhan enter de ve main menu.....";
 	getch();
 }
 
@@ -341,7 +341,7 @@ int main()
 		SET_COLOR(6);
 		cout << setw(52)
 
-			 << "Please choose one of the options below: "
+			 << "Chon mot trong cac chuc nang sau: "
 
 			 << endl
 			 << setw(71)
@@ -353,30 +353,30 @@ int main()
 
 		SET_COLOR(5);
 
-		cout << setw(25) << "( A ) Add Book" << endl
+		cout << setw(25) << "( A ) Them sach" << endl
 			 << endl
 
-			 << setw(31) << "( O ) Sort all Books" << endl
+			 << setw(31) << "( O ) Loc sach" << endl
 			 << endl
 
-			 << setw(33) << "( S ) Search all Books" << endl
+			 << setw(33) << "( S ) Tim kiem sach" << endl
 			 << endl
 
-			 << setw(33) << "( D ) Diplay all Books" << endl
+			 << setw(33) << "( D ) Hien thi sach" << endl
 			 << endl
 
-			 << setw(30) << "( T ) Delete a Book" << endl
+			 << setw(30) << "( T ) Xoa sach" << endl
 			 << endl
 
-			 << setw(40) << "( M ) Update Book Information" << endl
+			 << setw(40) << "( M ) Cap nhat thong tin sach" << endl
 			 << endl
 
-			 << setw(21) << "( Q ) Quit" << endl
+			 << setw(21) << "( Q ) Thoat" << endl
 			 << endl;
 
 		SET_COLOR(4);
 
-		cout << setw(32) << "Enter Option      [ ]" << endl
+		cout << setw(32) << "Nhap lua chon      [ ]" << endl
 			 << endl;
 		gotoxy(30, 21);
 
