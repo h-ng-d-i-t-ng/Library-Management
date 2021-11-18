@@ -3,7 +3,6 @@
 #include <fstream>  
 #include <conio.h>  
 #include <string.h>
-#include <stdio.h>   
 #include <cstdlib> 
 #include <windows.h>
 #include <time.h>
@@ -22,8 +21,8 @@ class Book
 		void displayBook(Book *B, int n);
 		void modify_book();
 		void write_book();
-	
 };
+
 fstream fp;
 Book book;
 
@@ -58,7 +57,7 @@ void Book::add(Book *B, int n)
 		cout<<"ADD BOOK\n\n";
 		cout << "Book no." << i+1;
 		(B+i)->addBook();
-        cout<<"\n\n\nBook Created..";
+        cout<<"\n\n\nBook Created...";
         Sleep(1000);
 	}
 		cout<<"Do you want to add more books? [y/n]";
@@ -101,7 +100,7 @@ void Book::write_book()
     }while(ch=='y'||ch=='Y');
     fp.close();
 }
-/*********************END CLASS STUDENT*************************/
+/*********************END CLASS BOOK*************************/
 /*class Student
 {
 
@@ -122,7 +121,7 @@ void gotoxy(short x, short y)
 int main()
 {
 	int n;
-	Book *B=new Book[n];
+	Book *B = new Book[n];
 	while (1)
     {
 		system("cls");
@@ -170,19 +169,19 @@ int main()
 		 	case 'D': book.displayBook(B,n); break;
          
 		 	//case 'S':
-		 	//case 's':search();break;
+		 	//case 's': search();break;
          
 		 	//case 't':
-		 	//case 'T':del();break;
+		 	//case 'T': del();break;
 		 
 		 	//case 'O':
-		 	//case 'o':sort();break;
+		 	//case 'o': sort();break;
          
 		 	//case 'm':
-		 	//case 'M':modify();break;
+		 	//case 'M': modify();break;
 		 
-		 	//case 'q':
-		 	//case 'Q':exit(0);break;
+		 	case 'q':
+		 	case 'Q': exit(0); break;
          
 		 	default:
 			puts("\n\n \t\tSelect only from the given menu.....\n \t\tpress enter to to go to main menu......");
