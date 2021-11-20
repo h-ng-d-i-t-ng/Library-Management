@@ -9,59 +9,42 @@
 #include<string>        //for work with string
 using namespace std;
 
-//////////////////////////////////////////////////
-//                       GOTOXY                        //
-//////////////////////////////////////////////////
-void gotoxy(short x, short y)
-{
-    COORD pos = {x, y};
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-}
-
-//////////////////////////////////////////////////
-//               SET FONT COLOR                    //
-//////////////////////////////////////////////////
-void SET_COLOR(int color)
-{
-    WORD wColor;
-    HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
-    if (GetConsoleScreenBufferInfo(hStdOut, &csbi))
-    {
-        wColor = (csbi.wAttributes & 0xF0) + (color & 0x0F);
-        SetConsoleTextAttribute(hStdOut, wColor);
-    }
-}
-
 class Book
 {
 	protected:
 		int nPubyear;
-		char cId[20], cTitle[100], cAuthor[100], cCategory[100];
+		string sId, sTitle, sAuthor, sCategory;
 	public:
+	
 	virtual void Add()
 	{
 		cout << "\nEnter ID: ";
 		fflush(stdin);
-		gets(cId);
+		getline(cin,sId);
 		cout << "\nEnter Title: ";
 		fflush(stdin);
-		gets(cTitle);
+		getline(cin,sTitle);
 		cout << "\nEnter Author: ";
 		fflush(stdin);
-		gets(cAuthor);
+		getline(cin,sAuthor);
 		cout << "\nEnter Category: ";
 		fflush(stdin);
-		gets(cCategory);
+		getline(cin,sCategory);
 		cout << "\nEnter year of publishcation: ";
 		cin >> nPubyear;
+		
 	}
 
 	virtual void show()
 	{
-		cout << setw(10) << cId << setw(30) << cTitle << setw(30) << cAuthor << setw(30) << cCategory << setw(20) << nPubyear << endl ;
+		cout << setw(10) << sId << setw(30) << sTitle << setw(30) << sAuthor << setw(30) << sCategory << setw(20) << nPubyear << endl ;
 		cout<<"__________"<<"______________________________"<<"______________________________"<<"______________________________"<<"______________________________"<<endl;
 	}
+		string getId() { return sId; }
+		string getTitle() { return sTitle; }
+		string getAuthor() { return sAuthor; }
+		string getCategory() { return sCategory; }
+		int getYear() { return nPubyear; }
 };
 
 class bookManager
@@ -99,29 +82,56 @@ class bookManager
 			}
 		}
 
-	void Sort();
-	
+	void SortN();
+	void delBook();
+	void searchbId();
 };
 
-void bookManager::Sort()
-{	
-	Book *B= new Book;
-	char t[100];
-	for(int i=0; i<book.size()-1;i++)
-	{
-		for(int j = i+1;j < book.size(); j++)
-		{
-			if (strcmp(B ->cTitle[i], B->cTitle[j]) > 0)
-		 {
-            strcpy(t, B->cTitle[j-1]);
-            strcpy(B->cTitle[j - 1], B->cTitle[j]);
-            strcpy(B->cTitle[j], t);
-         }
-
-		}
-	}
+void bookManager::SortN()
+{
+	for (int i = 0; i < book.size() - 1; i++)
+    {
+        for (int j =book.size() - 1; j > i; j--)
+        {
+            char *name1 = new char[book[j]->getTitle().length()];
+            strcpy(name1, book[j]->getTitle().c_str());
+            char *name2 = new char[book[j - 1]->getTitle().length()];
+            strcpy(name2, book[j - 1]->getTitle().c_str());
+            if (strcmp(name1, name2) < 0)
+            {
+                Book *tmp;
+                tmp = book[j];
+                book[j] = book[j - 1];
+                book[j - 1] = tmp;
+            }
+        }
+    }
+	displayBook();
+	
 }
-
+void bookManager::delBook(){
+int found = 0;
+            string del;
+			
+            cout << "  \n\n\nNhap ID de xoa: " << endl;
+            fflush(stdin);
+            getline(cin, del);
+            for (int i = 0; i <= book.size() - 1; i++)
+            {
+                if (del == book[i]->getId())
+                {
+                    found = 1;
+                   
+                        book.erase(book.begin() + i);
+                       
+                    break;
+                }
+            }
+            if (found == 0){
+                cout << "\n  ID khong ton tai!!!\n\n"<< endl;
+            }
+		displayBook();
+}
 
 
 int main()
@@ -130,7 +140,9 @@ int main()
 
 	b.addBook();
 	b.displayBook();
-
+	b.SortN();
+	b.delBook();
+	
 	cout << endl;
 	system("pause");
 	return 0;
