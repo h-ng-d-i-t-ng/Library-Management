@@ -43,16 +43,16 @@ class Book
 	{
 		cout << "\nEnter ID: ";
 		fflush(stdin);
-		getline(cin,cId);
+		gets(cId);
 		cout << "\nEnter Title: ";
 		fflush(stdin);
-		getline(cin,cTitle);
+		gets(cTitle);
 		cout << "\nEnter Author: ";
 		fflush(stdin);
-		getline(cin,cAuthor);
+		gets(cAuthor);
 		cout << "\nEnter Category: ";
 		fflush(stdin);
-		getline(cin,cCategory);
+		gets(cCategory);
 		cout << "\nEnter year of publishcation: ";
 		cin >> nPubyear;
 	}
@@ -104,19 +104,20 @@ class bookManager
 };
 
 void bookManager::Sort()
-{
+{	
+	Book *B= new Book;
 	char t[100];
 	for(int i=0; i<book.size()-1;i++)
 	{
 		for(int j = i+1;j < book.size(); j++)
 		{
-			if (strcmp(cTitle[i], cTitle[j]) > 0)
+			if (strcmp(B ->cTitle[i], B->cTitle[j]) > 0)
 		 {
-            strcpy(t, cTitle[j-1]);
-            strcpy(cTitle[j - 1], cTitle[j]);
-            strcpy(cTitle[j], t);
+            strcpy(t, B->cTitle[j-1]);
+            strcpy(B->cTitle[j - 1], B->cTitle[j]);
+            strcpy(B->cTitle[j], t);
          }
-			
+
 		}
 	}
 }
