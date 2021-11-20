@@ -82,12 +82,45 @@ class bookManager
 			}
 		}
 
-	void SortN();
-	void delBook();
-	void searchbId();
+	void SbyId();
+	void SbyTitle();
+	void SbyAuthor();
+	void SbyCategory();
+	void SbyPubYear();
+
+	void dbyId();
+	void dbyTitle();
+	void dbyCategory();
+	void dbyAuthor();
+	void dbyPubYear();
+	
 };
 
-void bookManager::SortN()
+
+
+void bookManager::SbyId()
+{
+	for (int i = 0; i < book.size() - 1; i++)
+    {
+        for (int j =book.size() - 1; j > i; j--)
+        {
+            char *name1 = new char[book[j]->getId().length()];
+            strcpy(name1, book[j]->getId().c_str());
+            char *name2 = new char[book[j - 1]->getId().length()];
+            strcpy(name2, book[j - 1]->getId().c_str());
+            if (strcmp(name1, name2) < 0)
+            {
+                Book *tmp;
+                tmp = book[j];
+                book[j] = book[j - 1];
+                book[j - 1] = tmp;
+            }
+        }
+    }
+	displayBook();
+}
+
+void bookManager::SbyTitle()
 {
 	for (int i = 0; i < book.size() - 1; i++)
     {
@@ -107,13 +140,76 @@ void bookManager::SortN()
         }
     }
 	displayBook();
-	
 }
-void bookManager::delBook(){
+
+void bookManager::SbyAuthor()
+{
+	for (int i = 0; i < book.size() - 1; i++)
+    {
+        for (int j =book.size() - 1; j > i; j--)
+        {
+            char *name1 = new char[book[j]->getAuthor().length()];
+            strcpy(name1, book[j]->getAuthor().c_str());
+            char *name2 = new char[book[j - 1]->getAuthor().length()];
+            strcpy(name2, book[j - 1]->getAuthor().c_str());
+            if (strcmp(name1, name2) < 0)
+            {
+                Book *tmp;
+                tmp = book[j];
+                book[j] = book[j - 1];
+                book[j - 1] = tmp;
+            }
+        }
+    }
+	displayBook();
+}
+
+void bookManager::SbyCategory()
+{
+	for (int i = 0; i < book.size() - 1; i++)
+    {
+        for (int j =book.size() - 1; j > i; j--)
+        {
+            char *name1 = new char[book[j]->getCategory().length()];
+            strcpy(name1, book[j]->getCategory().c_str());
+            char *name2 = new char[book[j - 1]->getCategory().length()];
+            strcpy(name2, book[j - 1]->getCategory().c_str());
+            if (strcmp(name1, name2) < 0)
+            {
+                Book *tmp;
+                tmp = book[j];
+                book[j] = book[j - 1];
+                book[j - 1] = tmp;
+            }
+        }
+	}
+	displayBook();
+}
+/*void bookManager::SbyPubYear()
+{
+	int a, b;
+	for (int i = 0; i < book.size() - 1; i++)
+    {
+        for (int j =book.size() - 1; j > i; j--)
+        {
+            book[j]->getYear() = a;
+			book[j-1]->getYear() = b;
+            if (a < b) 
+            {
+                Book *tmp;
+                tmp = book[j];
+                book[j] = book[j - 1];
+                book[j - 1] = tmp;
+            }
+        }
+	}
+	disolayBook();
+}*/
+void bookManager::dbyId()
+{
 int found = 0;
             string del;
-			
-            cout << "  \n\n\nNhap ID de xoa: " << endl;
+            cout << "  \n\n\nEnter the ID you want to delete: " << endl;
             fflush(stdin);
             getline(cin, del);
             for (int i = 0; i <= book.size() - 1; i++)
@@ -128,20 +224,127 @@ int found = 0;
                 }
             }
             if (found == 0){
-                cout << "\n  ID khong ton tai!!!\n\n"<< endl;
+                cout << "\n  ID not Found !!!\n\n"<< endl;
             }
 		displayBook();
 }
 
+void bookManager::dbyTitle()
+{
+	int found = 0;
+            string del;
+            cout << "  \n\n\n Enter the Title you want to delete : " << endl;
+            fflush(stdin);
+            getline(cin, del);
+            for (int i = 0; i <= book.size() - 1; i++)
+            {
+                if (del == book[i]->getTitle())
+                {
+                    found = 1;
+                   
+                        book.erase(book.begin() + i);
+                       
+                    break;
+                }
+            }
+            if (found == 0){
+                cout << "\n  Title not Found!!!\n\n"<< endl;
+            }
+		displayBook();
+}
 
+void bookManager::dbyCategory()
+{
+	int found = 0;
+            string del;
+            cout << "  \n\n\n Enter the Category you want to delete : " << endl;
+            fflush(stdin);
+            getline(cin, del);
+            for (int i = 0; i <= book.size() - 1; i++)
+            {
+                if (del == book[i]->getCategory())
+                {
+                    found = 1;
+                   
+                        book.erase(book.begin() + i);
+                       
+                    break;
+                }
+            }
+            if (found == 0){
+                cout << "\n  Category not Found!!!\n\n"<< endl;
+            }
+		displayBook();
+}
+
+void bookManager::dbyAuthor()
+{
+	int found = 0;
+            string del;
+            cout << "  \n\n\n Enter the Author you want to delete : " << endl;
+            fflush(stdin);
+            getline(cin, del);
+            for (int i = 0; i <= book.size() - 1; i++)
+            {
+                if (del == book[i]->getAuthor())
+                {
+                    found = 1;
+                   
+                        book.erase(book.begin() + i);
+                       
+                    break;
+                }
+            }
+            if (found == 0){
+                cout << "\n  Author not Found !!!\n\n"<< endl;
+            }
+		displayBook();
+}
+
+void bookManager::dbyPubYear()
+{
+	int found = 0;
+            int del;
+            cout << "  \n\n\n Enter the Author you want to delete : " << endl;
+            cin >> del;
+            for (int i = 0; i <= book.size() - 1; i++)
+            {
+                if (del == book[i]->getYear())
+                {
+                    found = 1;
+                   
+                        book.erase(book.begin() + i);
+                       
+                    break;
+                }
+            }
+            if (found == 0){
+                cout << "\n Year of Publication  not Found !!!\n\n"<< endl;
+            }
+		displayBook();
+
+}
 int main()
 {
 	bookManager b;
 
 	b.addBook();
 	b.displayBook();
-	b.SortN();
-	b.delBook();
+
+	
+	b.SbyId();
+	b.SbyTitle();
+	b.SbyAuthor();
+	b.SbyCategory();
+	//b.SbyPubYear();
+
+	
+	b.dbyId();
+	b.dbyTitle();
+	b.dbyAuthor();
+	b.dbyCategory();
+	b.dbyPubYear();
+	
 	
 	cout << endl;
 	system("pause");
