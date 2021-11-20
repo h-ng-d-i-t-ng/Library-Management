@@ -16,12 +16,13 @@ void gotoxy(short x, short y)
 }
 
 class Book {
-	private:
+	protected:
 		string sId,sTitle,sAuthor,sCategory; //private variables
 		int nPubYear,nsl;
 	public:
 		void add();
 		void in();
+	
 		string getid(){return sId;}
 		string getTitle(){return sTitle;}
 		string getAuthor(){return sAuthor;}
@@ -30,7 +31,7 @@ class Book {
 		int getsl(){return nsl;}
 		
 		Book(){
-			sId="null";
+			this->sId="null";
 			sTitle="null";
 			sAuthor="null";
 			sCategory="null";
@@ -222,8 +223,10 @@ void dbyId(Book *B, int &n)
 	{
 		if ((B + i)->getid() == Id)
 		{
-
-			*(B + i) = *(B + i + 1);
+			for (int j = i; j < n; j++)
+			{
+				*(B + j) = *(B + j + 1);
+			}
 			found++;
 			n--;
 			return;
@@ -243,7 +246,7 @@ void dbyTitle(Book *B, int &n)
 	cout << endl;
 	cout << "Deleting by name of book\n";
 	cout << "Enter the name of book you want to delete: ";
-	fflush(stdin);
+
 	getline(cin, Tname);
 
 	for (int i = 0; i < n; i++)
@@ -275,7 +278,7 @@ void dbyAuthor(Book *B, int &n)
 	cout << endl;
 	cout << "Deleting by author of book\n";
 	cout << "Enter the author of book you want to delete: ";
-	fflush(stdin);
+	
 	getline(cin, Aname);
 	for (int i = 0; i < n; i++)
 	{
@@ -373,6 +376,9 @@ void delBook(Book *B, int &n)
 }
 
 
+
+
+
 int main(){
 	int n;
 	cout<<"Nhap So Sach Ban Muon Quan Ly:";
@@ -380,6 +386,7 @@ int main(){
 	//cin.ignore();
 	Book *B=new Book[n];
 	adddanhsach(B,n);
+	 
 	indanhsach(B,n);
 	//suadoituong(B,n);
 	suadoitoanbo(B,n);
