@@ -94,11 +94,12 @@ class bookManager
 	void dbyAuthor();
 	void dbyPubYear();
 	
+    void searchbTitle();
 };
 
 
 
-void bookManager::SbyId()
+/*void bookManager::SbyId()
 {
 	for (int i = 0; i < book.size() - 1; i++)
     {
@@ -184,16 +185,16 @@ void bookManager::SbyCategory()
         }
 	}
 	displayBook();
-}
-/*void bookManager::SbyPubYear()
+} */
+void bookManager::SbyPubYear()
 {
 	int a, b;
 	for (int i = 0; i < book.size() - 1; i++)
     {
         for (int j =book.size() - 1; j > i; j--)
         {
-            book[j]->getYear() = a;
-			book[j-1]->getYear() = b;
+           a = book[j]->getYear() ;
+		    b =	book[j-1]->getYear() ;
             if (a < b) 
             {
                 Book *tmp;
@@ -203,9 +204,9 @@ void bookManager::SbyCategory()
             }
         }
 	}
-	disolayBook();
-}*/
-void bookManager::dbyId()
+	displayBook();
+}
+/*void bookManager::dbyId()
 {
 int found = 0;
             string del;
@@ -322,8 +323,23 @@ void bookManager::dbyPubYear()
                 cout << "\n Year of Publication  not Found !!!\n\n"<< endl;
             }
 		displayBook();
-
 }
+
+void bookManager::searchbTitle()
+{   
+    string h;
+    cout << " Enter Title to search:";
+    fflush(stdin);
+    getline(cin,h);
+    for (int i = 0; i <= book.size(); i++)
+    {
+        if(h == book[i]->getTitle())
+        {
+           book[i].displayBook();
+        }
+
+    }
+}*/
 int main()
 {
 	bookManager b;
@@ -331,20 +347,20 @@ int main()
 	b.addBook();
 	b.displayBook();
 
-	
-	b.SbyId();
+	//b.searchbTitle();
+/*	b.SbyId();
 	b.SbyTitle();
 	b.SbyAuthor();
-	b.SbyCategory();
-	//b.SbyPubYear();
+	b.SbyCategory();  */
+	b.SbyPubYear();
 
 	
-	b.dbyId();
+/*	b.dbyId();
 	b.dbyTitle();
 	b.dbyAuthor();
 	b.dbyCategory();
 	b.dbyPubYear();
-	
+*/	
 	
 	cout << endl;
 	system("pause");
