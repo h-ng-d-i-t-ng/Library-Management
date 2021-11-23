@@ -21,6 +21,27 @@
         }
       ],
       "preLaunchTask": "g++.exe build active file"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "c:\\Users\\HPs\\Documents\\GitHub\\Library-Management",
+      "environment": [],
+      "program": "c:\\Users\\HPs\\Documents\\GitHub\\Library-Management\\build\\Debug\\outDebug",
+      "internalConsoleOptions": "openOnSessionStart",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "externalConsole": false,
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
     }
   ]
 }
